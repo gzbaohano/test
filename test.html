@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./node_modules/vue/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style type="text/css">
+			.demo-alert-box {
+				font-size: ;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<msg v-bind:msgcontent='msgContent' v-on:change='msgContent=$event'></msg>
+		</div>
+		<script type="text/javascript">
+			Vue.component('msg', {
+				props: ['msgcontent'],
+				template: `<div><div v-text='msgcontent'>22</div><button v-on:click="$emit('change','333')">change</button></div>`
+			})
+			var app = new Vue({
+				el: '#app',
+				data: {
+					msgContent: 'www'
+				},
+				methods: {
+					//					change: function(a) {
+					//						this.msgContent = a
+					//						console.log(a)
+					//					}
+				}
+			})
+		</script>
+
+		<div id="app02">
+			<msg02 v-bind:msg='msg' v-on:change='change'></msg02>
+		</div>
+		<script type="text/javascript">
+			Vue.component('msg02', {
+				props: ['msg'],
+				template: `<div>
+					<p v-text='msg' v-on:click='$emit("change")'></p>
+				</div>`
+			})
+			var app02 = new Vue({
+				el: '#app02',
+				data: {
+					msg: '3333333333333333333'
+				},
+				methods: {
+					change: function() {
+						this.msg = '2222222222222222'
+					}
+				}
+			})
+		</script>
+
+		<div id="app03">
+			<vc-input v-model='inputtext'></vc-input>
+			{{inputtext}}
+		</div>
+		<script type="text/javascript">
+			Vue.component('vc-input', {
+				props: ['value'],
+				template: `<input v-bind:value='value' v-on:input='$emit("input",$event.target.value)'>`
+			})
+			var app03 = new Vue({
+				el: '#app03',
+				data: {
+					inputtext: ''
+				}
+			})
+		</script>
+		<div id="app04">
+			<alert-box>fff</alert-box>
+		</div>
+		<script type="text/javascript">
+			Vue.component('alert-box', {
+				template: `
+				    <div class="demo-alert-box">
+				      <strong>Error!</strong>
+				      <slot></slot>
+				    </div>
+				`
+			})
+			var app04 = new Vue({
+				el: '#app04',
+				data: {
+
+				}
+			})
+		</script>
+		<div id="app05">
+			<div v-bind:is="currentTabComponent"></div>
+			<button v-on:click="currentTabComponent=='vc01'?currentTabComponent='vc02':currentTabComponent='vc01'">222</button>
+		</div>
+		<script type="text/javascript">
+			Vue.component('vc01', {
+				template: '<span>vc01</span>'
+			})
+			Vue.component('vc02', {
+				template: '<span>vc02</span>'
+			})
+			var app05 = new Vue({
+				el: '#app05',
+				data: {
+					currentTabComponent: 'vc01'
+				}
+			})
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="./node_modules/vue/dist/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+
+		<div id="app">
+			<button>change</button>
+			<div v-bind:is='currentCom' v-on:click="currentCom==='v-content'?currentCom='v-content02':currentCom='v-content'"></div>
+		</div>
+		<script type="text/javascript">
+			Vue.component('v-content',{
+				template:`
+					<div>v-content</div>
+				`
+			})
+			Vue.component('v-content02',{
+				template:`
+					<div>v-content02</div>
+				`
+			})
+			Vue.component('v-content03',{
+				template:`
+					<div>v-content03</div>
+				`
+			})
+			var app=new Vue({
+				el:'#app',
+				data:{
+					currentCom:'v-content'
+				}
+			})
+		</script>
+	</body>
+
+</html>
